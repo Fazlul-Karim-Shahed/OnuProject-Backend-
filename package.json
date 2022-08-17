@@ -1,0 +1,19 @@
+{
+  "name": "bohubrihi-e-commerce-backend",
+  "version": "1.0.0",
+  "description": "This is an E-commerce project build for practice",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fazlul-Karim-Shahed/test-e-commerce-backend-.git"
+  },
+  "author": "Shahed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fazlul-Karim-Shahed/test-e-commerce-backend-/issues"
+  },
+  "homepage": "https://github.com/Fazlul-Karim-Shahed/test-e-commerce-backend-#readme"
+}
