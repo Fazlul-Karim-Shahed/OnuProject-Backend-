@@ -6,19 +6,27 @@ const Products = model('Products', Schema({
         type: String,
         required: true
     },
-    category: {
+    catalogId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Catalog',
+    },
+    categoryId: {
         type: Schema.Types.ObjectId,
         ref: 'Categories',
         required: true
     },
+    subCategoryId: {
+        type: Schema.Types.ObjectId,
+        ref: 'SubCategories',
+    },
     price: { type: Number, required: true },
-    updatedPrice: { type: Number, required: true },
+    discount: { type: Number },
     description: { type: String, required: true },
     quantity: { type: Number, required: true },
-    photo: {
+    photo: [{
         data: Buffer,
         contentType: String,
-    }
+    }],
 
 }, { timestamps: true }))
 

@@ -1,13 +1,13 @@
 const checkAdmin = require('../Middlewares/CheckAdmin')
-const getUsers = require('./RouterFuntions/getUsers')
-const signIn = require('./RouterFuntions/signIn')
-const signUp = require('./RouterFuntions/signUp')
+const getUsers = require('./RouterFuntions/UserFunctions/getUsers')
+const signin = require('./RouterFuntions/UserFunctions/signIn')
+const signup = require('./RouterFuntions/UserFunctions/signUp')
+
 
 const router = require('express').Router()
 
-
 router.get('/', checkAdmin, getUsers)
-router.post('/signin', signIn)
-router.post('/signup', signUp)
+router.post('/signin', signin)
+router.post('/signup', signup)
 
 module.exports = router
