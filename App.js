@@ -7,6 +7,10 @@ const compression = require('compression')
 const ProductRouter = require('./Routers/ProductRouter')
 const CategoryRouter = require('./Routers/CategoryRouter')
 const UserRouter = require('./Routers/UserRouter')
+const CatalogRouter = require('./Routers/CatalogRouter')
+const SubCategoryRouter = require('./Routers/SubCategoryRouter')
+const ProductPhotoRouter = require('./Routers/ProductPhotoRouter')
+const FilterRouter = require('./Routers/FilterRouter')
 
 /////////////////
 
@@ -21,7 +25,10 @@ const DB = process.env.MONGODB_DATABASE.replace('<password>', process.env.MONGOD
 
 mongoose.connect(DB)
     .then(data => console.log('Successfully connected to MongoDB Server'))
-    .catch(data => console.log('Something went wrong with MongoDB Server'))
+    .catch(data => {
+        console.log(data);
+        // console.log('Something went wrong with MongoDB Server')
+    })
 
 
 
@@ -29,6 +36,10 @@ mongoose.connect(DB)
 app.use('/product', ProductRouter)
 app.use('/category', CategoryRouter)
 app.use('/user', UserRouter)
+app.use('/catalog', CatalogRouter)
+app.use('/subcategory', SubCategoryRouter)
+app.use('/product-photos', ProductPhotoRouter)
+app.use('/filter', FilterRouter)
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: 'Something went wrong', error: true })
