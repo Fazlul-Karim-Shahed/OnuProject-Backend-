@@ -1,4 +1,4 @@
-require('express-async-errors')
+// require('express-async-errors')
 const express = require('express')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
@@ -16,14 +16,14 @@ const FilterRouter = require('./Routers/FilterRouter')
 
 dotenv.config()
 const app = express()
-app.use(express.json())
 app.use(cors())
+app.use(express.json({ limit: '50mb' }));
 app.use(compression())
 
 ///////////////
 const DB = process.env.MONGODB_DATABASE.replace('<password>', process.env.MONGODB_PASS)
 
-mongoose.connect(DB)
+mongoose.connect(process.env.MONGODB_LOCAL + '/OnuProject')
     .then(data => console.log('Successfully connected to MongoDB Server'))
     .catch(data => {
         console.log(data);
@@ -41,9 +41,9 @@ app.use('/subcategory', SubCategoryRouter)
 app.use('/product-photos', ProductPhotoRouter)
 app.use('/filter', FilterRouter)
 
-app.use((err, req, res, next) => {
-    res.status(500).send({ message: 'Something went wrong', error: true })
-})
+// app.use((err, req, res, next) => {
+//     res.status(500).send({ message: 'Something went wrong', error: true })
+// })
 
 ///////////////////////////////
 const port = process.env.PORT
