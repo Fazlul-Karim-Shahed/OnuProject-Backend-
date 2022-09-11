@@ -7,7 +7,8 @@ const PartsInfos = model('PartsInfos', Schema({
         ref: 'Products'
     },
     partsInfo: {type: Object} ,
-    additionalPrice: Number
+    additionalPrice: Number,
+    
 }))
 
 module.exports.PartsInfos = PartsInfos
