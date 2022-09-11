@@ -21,7 +21,11 @@ const ProductPhotos = model('ProductPhotos', Schema({
     },
     sizeId: {
         type: Schema.Types.ObjectId,
-        ref: 'Size'
+        ref: 'Sizes'
+    },
+    partsInfo: {
+        type: Schema.Types.ObjectId,
+        ref: 'PartsInfos'
     },
     additionalPrice: Number
 }))

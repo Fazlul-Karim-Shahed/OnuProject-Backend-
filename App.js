@@ -1,23 +1,24 @@
-// require('express-async-errors')
+require('express-async-errors')
 const express = require('express')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const compression = require('compression')
+var bodyParser = require('body-parser');
 const ProductRouter = require('./Routers/ProductRouter')
 const CategoryRouter = require('./Routers/CategoryRouter')
 const UserRouter = require('./Routers/UserRouter')
 const CatalogRouter = require('./Routers/CatalogRouter')
 const SubCategoryRouter = require('./Routers/SubCategoryRouter')
 const ProductPhotoRouter = require('./Routers/ProductPhotoRouter')
-const FilterRouter = require('./Routers/FilterRouter')
+const PropertiesRouter = require('./Routers/PropertiesRouter')
 
 /////////////////
 
 dotenv.config()
 const app = express()
-app.use(cors())
 app.use(express.json({ limit: '50mb' }));
+app.use(cors())
 app.use(compression())
 
 ///////////////
@@ -27,7 +28,7 @@ mongoose.connect(process.env.MONGODB_LOCAL + '/OnuProject')
     .then(data => console.log('Successfully connected to MongoDB Server'))
     .catch(data => {
         console.log(data);
-        // console.log('Something went wrong with MongoDB Server')
+        console.log('Something went wrong with MongoDB Server')
     })
 
 
@@ -39,11 +40,11 @@ app.use('/user', UserRouter)
 app.use('/catalog', CatalogRouter)
 app.use('/subcategory', SubCategoryRouter)
 app.use('/product-photos', ProductPhotoRouter)
-app.use('/filter', FilterRouter)
+app.use('/properties', PropertiesRouter)
 
-// app.use((err, req, res, next) => {
-//     res.status(500).send({ message: 'Something went wrong', error: true })
-// })
+app.use((err, req, res, next) => {
+    res.status(500).send({ message: 'Something went wrong', error: true })
+})
 
 ///////////////////////////////
 const port = process.env.PORT
