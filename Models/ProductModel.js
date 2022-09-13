@@ -27,6 +27,7 @@ const Products = model('Products', Schema({
         data: Buffer,
         contentType: String,
     }],
+    
 
 }, { timestamps: true }))
 

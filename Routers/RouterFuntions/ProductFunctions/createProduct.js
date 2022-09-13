@@ -7,11 +7,10 @@ const _ = require('lodash')
 
 const createProduct = async (req, res) => {
 
-    // console.log(req);
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
     form.parse(req, (err, fields, files) => {
-        // console.log(fields, files);
+        
         if (err) {
 
             res.send({ message: 'File upload failed', error: true })
