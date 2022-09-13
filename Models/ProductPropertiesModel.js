@@ -1,12 +1,12 @@
 const { Schema, model } = require('mongoose')
 
-const ProductPhotos = model('ProductPhotos', Schema({
-    finishingColor: String,
+const ProductProperties = model('ProductProperties', Schema({
+
     productId: {
         type: Schema.Types.ObjectId,
         ref: 'Products'
     },
-    photos: [{
+    photo: [{
         data: Buffer,
         contentType: String,
     }],
@@ -23,11 +23,11 @@ const ProductPhotos = model('ProductPhotos', Schema({
         type: Schema.Types.ObjectId,
         ref: 'Sizes'
     },
-    partsInfo: {
+    partsInfoId: {
         type: Schema.Types.ObjectId,
         ref: 'PartsInfos'
     },
-    additionalPrice: Number
+
 }))
 
-module.exports.ProductPhotos = ProductPhotos
+module.exports.ProductProperties = ProductProperties

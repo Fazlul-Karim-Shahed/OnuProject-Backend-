@@ -1,4 +1,4 @@
-const { Finishings } = require('../../../Models/FinishingModel')
+const { Finishings } = require('../../../../Models/FinishingModel')
 
 const createFinishing = async (req, res) => {
 

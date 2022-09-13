@@ -1,4 +1,4 @@
-require('express-async-errors')
+// require('express-async-errors')
 const express = require('express')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
@@ -10,7 +10,7 @@ const CategoryRouter = require('./Routers/CategoryRouter')
 const UserRouter = require('./Routers/UserRouter')
 const CatalogRouter = require('./Routers/CatalogRouter')
 const SubCategoryRouter = require('./Routers/SubCategoryRouter')
-const ProductPhotoRouter = require('./Routers/ProductPhotoRouter')
+const ProductPropertiesRouter = require('./Routers/ProductPropertiesRouter')
 const PropertiesRouter = require('./Routers/PropertiesRouter')
 
 /////////////////
@@ -39,12 +39,12 @@ app.use('/category', CategoryRouter)
 app.use('/user', UserRouter)
 app.use('/catalog', CatalogRouter)
 app.use('/subcategory', SubCategoryRouter)
-app.use('/product-photos', ProductPhotoRouter)
+app.use('/product-properties', ProductPropertiesRouter)
 app.use('/properties', PropertiesRouter)
 
-app.use((err, req, res, next) => {
-    res.status(500).send({ message: 'Something went wrong', error: true })
-})
+// app.use((err, req, res, next) => {
+//     res.status(500).send({ message: 'Something went wrong', error: true })
+// })
 
 ///////////////////////////////
 const port = process.env.PORT
