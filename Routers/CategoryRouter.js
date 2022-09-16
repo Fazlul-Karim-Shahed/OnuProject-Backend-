@@ -12,7 +12,7 @@ router.post('/create', createCategory)
 router.get('/', getCategory)
 router.delete('/delete/:id', deleteCategory)
 router.put('/update', updateCategory)
-router.get('/id/:catalogId', getCategoryByCatalog)
+router.get('/catalog-id/:catalog', getCategoryByCatalog)
 
 
 module.exports = router
