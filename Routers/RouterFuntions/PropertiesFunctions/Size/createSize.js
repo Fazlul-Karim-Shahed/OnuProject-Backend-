@@ -2,7 +2,7 @@ const { Sizes } = require('../../../../Models/SizeModel')
 
 const createSize = async (req, res) => {
 
-    const data = await Sizes.findOne({ productId: req.body.productId, size: req.body.size })
+    const data = await Sizes.findOne({ $and: [{ productId: req.body.productId }, { size: req.body.size }] })
     if (data) {
         res.send({ message: 'Already exist', error: true })
     }

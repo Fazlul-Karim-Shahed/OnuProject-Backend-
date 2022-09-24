@@ -10,7 +10,7 @@ const createProductProperties = async (req, res) => {
     form.keepExtensions = true
     form.parse(req, (err, fields, files) => {
 
-        ProductProperties.findOne({ productId: fields.productId, finishingId: fields.finishingId }, (err, result) => {
+        ProductProperties.findOne({ $and: [{ productId: fields.productId }, { finishingId: fields.finishingId }, { finishingColorId: fields.finishingColorId }, { sizeId: fields.sizeId }, { partsInfoId: fields.partsInfoId }] }, (err, result) => {
 
             if (result) return res.send({ message: 'Already exists', error: true })
 
@@ -35,7 +35,6 @@ const createProductProperties = async (req, res) => {
 
                 let obj = _.pick(fields, ['productId', 'sizeId', 'finishingId', 'finishingColorId', 'partsInfoId'])
 
-                console.log('Obj: ', obj);
                 obj.photo = photo
 
 

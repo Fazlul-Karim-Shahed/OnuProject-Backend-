@@ -4,7 +4,8 @@ const _ = require('lodash')
 
 const deleteProductProperties = async (req, res) => {
 
-    const productProperties = await ProductProperties.deleteOne(_.pick(req.body, ['productId', 'sizeId', 'finishingId', 'finishingColorId', 'partsInfoId']))
+    const productProperties = await ProductProperties.deleteOne({ _id: req.params.id })
+    console.log(productProperties);
 
     res.send({ message: 'Deleted Successfully', error: false, value: productProperties })
 }

@@ -10,13 +10,13 @@ const createProduct = async (req, res) => {
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
     form.parse(req, (err, fields, files) => {
-        
+
         if (err) {
 
             res.send({ message: 'File upload failed', error: true })
         }
         else {
-            
+
             let product = new Products(_.pick(fields, ['name', 'categoryId', 'price', 'description', 'quantity', 'discount', 'catalogId', 'subCategoryId']))
 
             if (files && Object.keys(files).length !== 0) {
