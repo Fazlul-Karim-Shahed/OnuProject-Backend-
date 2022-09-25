@@ -42,6 +42,7 @@ const createPayment = async (req, res) => {
 
     axios.post('https://sandbox.sslcommerz.com/gwprocess/v4/api.php', fd)
         .then(data => {
+            console.log(data.data);
             res.send(data.data)
         })
 
