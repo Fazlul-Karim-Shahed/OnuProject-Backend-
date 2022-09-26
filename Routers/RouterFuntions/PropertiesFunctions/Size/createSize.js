@@ -6,10 +6,12 @@ const createSize = async (req, res) => {
     if (data) {
         res.send({ message: 'Already exist', error: true })
     }
-    let size = new Sizes(req.body)
+    else{
+        let size = new Sizes(req.body)
 
-    size = await size.save()
-    res.send({ message: 'Size name create successfully', error: false, value: size })
+        size = await size.save()
+        res.send({ message: 'Size name create successfully', error: false, value: size })
+    }
 
 }
 

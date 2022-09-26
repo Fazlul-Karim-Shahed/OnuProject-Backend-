@@ -16,6 +16,7 @@ const createPayment = async (req, res) => {
         success_url: 'http://localhost:3000/success',
         fail_url: 'http://localhost:3000/fail',
         cancel_url: 'http://localhost:3000/cancel',
+        ipn_url: 'https://calm-scrubland-88798.herokuapp.com/payment/ipn',
         emi_option: 0,
         shipping_method: 'Courier',
         product_category: 'furniture',
