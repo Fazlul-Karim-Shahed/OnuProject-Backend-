@@ -1,6 +1,8 @@
 
 const formData = require('form-data')
 const axios = require('axios').default
+const generateUniqueId = require('generate-unique-id')
+const { Orders } = require('../../../Models/OrderModel')
 
 
 const createPayment = async (req, res) => {
@@ -12,7 +14,7 @@ const createPayment = async (req, res) => {
         store_passwd: 'shahe60d34a78a55ae@ssl',
         total_amount: data.total,
         currency: 'BDT',
-        tran_id: Math.random().toString(),
+        tran_id: generateUniqueId({ length: 30, useNumbers: true, useLetters: true, includeSymbols: ['@'] }),
         success_url: 'http://localhost:3000/success',
         fail_url: 'http://localhost:3000/fail',
         cancel_url: 'http://localhost:3000/cancel',
@@ -22,14 +24,14 @@ const createPayment = async (req, res) => {
         product_category: 'furniture',
         product_name: data.productName,
         product_profile: 'physical-goods',
-        cus_name: data.firstName + data.lastName,
+        cus_name: data.firstName + " " + data.lastName,
         cus_email: data.email,
         cus_add1: data.address,
         cus_city: data.city,
         cus_postcode: data.postCode,
         cus_country: 'Bangladesh',
         cus_phone: data.phone,
-        ship_name: data.firstName + data.lastName,
+        ship_name: data.firstName + " " + data.lastName,
         ship_add1: data.address,
         ship_city: data.city,
         ship_postcode: data.postCode,
@@ -42,9 +44,34 @@ const createPayment = async (req, res) => {
     }
 
     axios.post('https://sandbox.sslcommerz.com/gwprocess/v4/api.php', fd)
-        .then(data => {
-            console.log(data.data);
-            res.send(data.data)
+        .then(response => {
+            if (response.data.status === 'SUCCESS') {
+
+                let obj = {}
+                obj.cartItem = data.cartItem
+                obj.userId = data.userId
+                obj.paymentMethod = data.payment
+                obj.totalAmount = data.total
+                obj.transactionId = payData.tran_id
+                obj.profile = {
+                    customerName: payData.cus_name,
+                    email: data.email,
+                    address: data.address,
+                    city: data.city,
+                    postCode: data.postCode,
+                    phone: data.phone,
+                    value_a: data.userId
+                }
+                obj.sessionKey = response.data.sessionkey
+                console.log('obj', obj);
+                let order = new Orders(obj)
+                order.save((err, result) => {
+                    console.log(err, result);
+                    if (!err) return res.send(response.data)
+                })
+
+            }
+            else return res.send(response.data)
         })
 
 }
