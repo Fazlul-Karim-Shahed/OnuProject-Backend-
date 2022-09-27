@@ -35,7 +35,8 @@ const createPayment = async (req, res) => {
         ship_add1: data.address,
         ship_city: data.city,
         ship_postcode: data.postCode,
-        ship_country: 'Bangladesh'
+        ship_country: 'Bangladesh',
+        value_a: data.userId
     }
 
     let fd = new formData()
