@@ -1,4 +1,4 @@
-// require('express-async-errors')
+require('express-async-errors')
 const express = require('express')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
@@ -56,9 +56,9 @@ app.use('/properties', PropertiesRouter)
 app.use('/cart', CartRouter)
 app.use('/payment', PaymentRouter)
 
-// app.use((err, req, res, next) => {
-//     res.status(500).send({ message: 'Something went wrong', error: true })
-// })
+app.use((err, req, res, next) => {
+    res.status(500).send({ message: 'Something went wrong', error: true })
+})
 
 ///////////////////////////////
 const port = process.env.PORT
