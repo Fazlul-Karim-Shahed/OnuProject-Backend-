@@ -14,6 +14,7 @@ const ProductPropertiesRouter = require('./Routers/ProductPropertiesRouter')
 const PropertiesRouter = require('./Routers/PropertiesRouter')
 const CartRouter = require('./Routers/CartRouters')
 const PaymentRouter = require('./Routers/PaymentRouter')
+const OrderRouter = require('./Routers/OrderRouter')
 
 /////////////////
 
@@ -55,6 +56,7 @@ app.use('/product-properties', ProductPropertiesRouter)
 app.use('/properties', PropertiesRouter)
 app.use('/cart', CartRouter)
 app.use('/payment', PaymentRouter)
+app.use('/order', OrderRouter)
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: 'Something went wrong', error: true })
