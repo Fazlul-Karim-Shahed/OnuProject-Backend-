@@ -64,7 +64,9 @@ const createPayment = async (req, res) => {
                     value_a: data.userId
                 }
                 obj.sessionKey = response.data.sessionkey
+                
                 console.log('obj', obj);
+
                 let order = new Orders(obj)
                 order.save((err, result) => {
                     console.log(err, result);

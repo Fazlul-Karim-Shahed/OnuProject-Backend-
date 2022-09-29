@@ -20,7 +20,8 @@ const ipn = async (req, res) => {
             cardIssuerCountryCode: data.card_issuer_country_code,
             currencyAmount: data.currency_amount,
             valueA: data.value_a,
-            verifyKey: data.verify_key
+            verifyKey: data.verify_key,
+            paymentStatus: 'paid'
         })
 
         await Carts.deleteMany({ userId: data.value_a })

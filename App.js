@@ -4,7 +4,6 @@ const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const compression = require('compression')
-var bodyParser = require('body-parser');
 const ProductRouter = require('./Routers/ProductRouter')
 const CategoryRouter = require('./Routers/CategoryRouter')
 const UserRouter = require('./Routers/UserRouter')
