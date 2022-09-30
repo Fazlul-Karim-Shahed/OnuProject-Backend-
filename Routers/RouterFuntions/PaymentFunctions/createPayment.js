@@ -3,6 +3,7 @@ const formData = require('form-data')
 const axios = require('axios').default
 const generateUniqueId = require('generate-unique-id')
 const { Orders } = require('../../../Models/OrderModel')
+const { Carts } = require('../../../Models/CartModel')
 
 
 const createPayment = async (req, res) => {
@@ -14,7 +15,7 @@ const createPayment = async (req, res) => {
         store_passwd: 'shahe60d34a78a55ae@ssl',
         total_amount: data.total,
         currency: 'BDT',
-        tran_id: generateUniqueId({ length: 30, useNumbers: true, useLetters: true, includeSymbols: ['@'] }),
+        tran_id: generateUniqueId({ length: 35, useNumbers: true, useLetters: true }),
         success_url: 'https://onu-project-38acc.firebaseapp.com/success',
         fail_url: 'https://onu-project-38acc.firebaseapp.com/fail',
         cancel_url: 'https://onu-project-38acc.firebaseapp.com/cancel',
@@ -44,38 +45,61 @@ const createPayment = async (req, res) => {
         fd.append(i, payData[i])
     }
 
-    axios.post('https://sandbox.sslcommerz.com/gwprocess/v4/api.php', fd)
-        .then(response => {
-            if (response.data.status === 'SUCCESS') {
 
-                let obj = {}
-                obj.cartItem = data.cartItem
-                obj.userId = data.userId
-                obj.paymentMethod = data.payment
-                obj.totalAmount = data.total
-                obj.transactionId = payData.tran_id
-                obj.profile = {
-                    customerName: payData.cus_name,
-                    email: data.email,
-                    address: data.address,
-                    city: data.city,
-                    postCode: data.postCode,
-                    phone: data.phone,
-                    value_a: data.userId
+    let obj = {}
+    obj.cartItem = data.cartItem
+    obj.userId = data.userId
+    obj.paymentMethod = data.payment
+    obj.totalAmount = data.total
+    obj.transactionId = payData.tran_id
+    obj.profile = {
+        customerName: payData.cus_name,
+        email: data.email,
+        address: data.address,
+        city: data.city,
+        postCode: data.postCode,
+        phone: data.phone,
+        value_a: data.userId
+    }
+
+    if (data.payment === 'ssl') {
+        axios.post('https://sandbox.sslcommerz.com/gwprocess/v4/api.php', fd)
+            .then(response => {
+                if (response.data.status === 'SUCCESS') {
+                    console.log(response.data.status);
+                    obj.sessionKey = response.data.sessionkey
+
+
+                    let order = new Orders(obj)
+                    order.save((err, result) => {
+                        console.log('1');
+                        console.log(err);
+                        if (!err) return res.send(response.data)
+                    })
                 }
-                obj.sessionKey = response.data.sessionkey
-                
-                console.log('obj', obj);
 
-                let order = new Orders(obj)
-                order.save((err, result) => {
-                    console.log(err, result);
-                    if (!err) return res.send(response.data)
+                else {
+                    console.log('2');
+                    return res.send(response.data)
+                }
+            })
+    }
+
+    else {
+
+        let order = new Orders(obj)
+        order.save((err, result) => {
+            if (!err) {
+
+                Carts.deleteMany({ userId: data.userId }, (err, r) => {
+                    if (r) return res.send(result)
                 })
 
+
             }
-            else return res.send(response.data)
         })
+
+    }
 
 }
 

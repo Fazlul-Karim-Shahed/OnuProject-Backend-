@@ -2,7 +2,8 @@ const { Schema, model } = require('mongoose')
 
 const Orders = model('Orders', Schema({
 
-    cartItem: [{ type: Schema.Types.ObjectId, ref: 'Carts' }],
+    // cartItem: [{ type: Schema.Types.ObjectId, ref: 'Carts' }],
+    cartItem: [{ type: Object }],
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'Users',
@@ -50,7 +51,7 @@ const Orders = model('Orders', Schema({
     valueA: String,
     verifyKey: String
 
-}))
+}, { timestamps: true }))
 
 
 module.exports.Orders = Orders
