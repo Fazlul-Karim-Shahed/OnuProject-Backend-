@@ -32,8 +32,8 @@ const Orders = model('Orders', Schema({
     },
     productStatus: {
         type: String,
-        enum: ['pending', 'delivered'],
-        default: 'pending'
+        enum: ['processing', 'delivered', 'prepared', 'received'],
+        default: 'received'
     },
 
     // after getting ipn

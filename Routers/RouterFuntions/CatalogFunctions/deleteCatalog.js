@@ -4,6 +4,7 @@ const _ = require('lodash')
 const { Categories } = require("../../../Models/CategoryModel")
 const { SubCategories } = require("../../../Models/SubCategoryModel")
 const { Products } = require("../../../Models/ProductModel")
+const { ProductProperties } = require("../../../Models/ProductPropertiesModel")
 
 
 const deleteCatalog = async (req, res) => {

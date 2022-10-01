@@ -24,9 +24,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(compression())
 
-// Local DB
-const DB = process.env.MONGODB_DATABASE.replace('<password>', process.env.MONGODB_PASS)
 
+// Local DB
 // mongoose.connect(process.env.MONGODB_LOCAL + '/OnuProject')
 //     .then(data => console.log('Successfully connected to MongoDB Server'))
 //     .catch(data => {
@@ -35,7 +34,9 @@ const DB = process.env.MONGODB_DATABASE.replace('<password>', process.env.MONGOD
 //     })
 
 
+
 // Online DB
+const DB = process.env.MONGODB_DATABASE.replace('<password>', process.env.MONGODB_PASS)
 mongoose.connect(DB)
     .then(data => console.log('Successfully connected to MongoDB Server'))
     .catch(data => {
