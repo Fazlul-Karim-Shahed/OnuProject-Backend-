@@ -3,6 +3,7 @@ const { getFinishing } = require('./RouterFuntions/PropertiesFunctions/Finishing
 const { createFinishingColor } = require('./RouterFuntions/PropertiesFunctions/FinishingColor/createFinishingColor')
 const { getFinishingColor } = require('./RouterFuntions/PropertiesFunctions/FinishingColor/getFinishingColor')
 const { getAllProperties } = require('./RouterFuntions/PropertiesFunctions/getAllProperties')
+const { getAllPropertiesById } = require('./RouterFuntions/PropertiesFunctions/getAllPropertiesById')
 const { createPartsInfo } = require('./RouterFuntions/PropertiesFunctions/PartsInfo/createPartsInfo')
 const { getPartsInfo } = require('./RouterFuntions/PropertiesFunctions/PartsInfo/getPartsInfo')
 const { createSize } = require('./RouterFuntions/PropertiesFunctions/Size/createSize')
@@ -12,7 +13,8 @@ const router = require('express').Router()
 
 // All properties
 
-router.get('/all-properties/:id', getAllProperties)
+router.get('/all-properties/:id', getAllPropertiesById)
+router.get('/all-properties/', getAllProperties)
 
 // Finishing router
 router.get('/finishing/:id', getFinishing)

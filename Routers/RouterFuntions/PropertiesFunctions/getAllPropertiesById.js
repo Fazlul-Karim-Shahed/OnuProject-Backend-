@@ -3,12 +3,13 @@ const { Finishings } = require('../../../Models/FinishingModel')
 const { PartsInfos } = require('../../../Models/PartsInfoModel')
 const { FinishingColors } = require('../../../Models/FinishingColorModel')
 
-const getAllProperties = async (req, res) => {
+const getAllPropertiesById = async (req, res) => {
 
-    const size = await Sizes.find().sort({ additionalPrice: 1 })
-    const finishing = await Finishings.find()
-    const finishingColor = await FinishingColors.find()
-    const partsInfo = await PartsInfos.find()
+    const id = req.params.id
+    const size = await Sizes.find({ productId: id })
+    const finishing = await Finishings.find({ productId: id })
+    const finishingColor = await FinishingColors.find({ productId: id })
+    const partsInfo = await PartsInfos.find({ productId: id })
 
     res.send({
         message: 'All properties', error: false, value: {
@@ -21,4 +22,4 @@ const getAllProperties = async (req, res) => {
 
 }
 
-module.exports.getAllProperties = getAllProperties
+module.exports.getAllPropertiesById = getAllPropertiesById
