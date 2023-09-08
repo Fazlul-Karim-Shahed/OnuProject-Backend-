@@ -40,7 +40,6 @@ const DB = process.env.MONGODB_DATABASE.replace('<password>', process.env.MONGOD
 mongoose.connect(DB)
     .then(data => console.log('Successfully connected to MongoDB Server'))
     .catch(data => {
-        console.log(data);
         console.log('Something went wrong with MongoDB Server')
     })
 
